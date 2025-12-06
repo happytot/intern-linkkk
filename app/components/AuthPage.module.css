@@ -1,0 +1,325 @@
+/* =========================================
+   🖼️ MAIN LAYOUT & BACKGROUND
+   ========================================= */
+   .bodyContainer {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Uses global var from globals.css */
+    background-color: var(--bg-main);
+    font-family: var(--font-body);
+    overflow: hidden;
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Creating the Ambient Orbs using Pseudo-elements */
+.bodyContainer::before,
+.bodyContainer::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+    animation: floatOrb 10s infinite ease-in-out alternate;
+}
+
+/* Orb 1: Uses Global Var */
+.bodyContainer::before {
+    width: 600px;
+    height: 600px;
+    background: var(--orb-1);
+    opacity: var(--orb-opacity);
+    top: -200px;
+    left: -200px;
+}
+
+/* Orb 2: Uses Global Var */
+.bodyContainer::after {
+    width: 500px;
+    height: 500px;
+    background: var(--orb-2);
+    opacity: var(--orb-opacity);
+    bottom: -150px;
+    right: -100px;
+    animation-delay: -5s;
+}
+
+@keyframes floatOrb {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(20px, 40px); }
+}
+
+/* =========================================
+   🧊 GLASS CARD CONTAINER
+   ========================================= */
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1; /* Brings content above orbs */
+}
+
+.formContainer {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    /* Uses global glass variables */
+    background: var(--bg-glass); 
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 48px 40px;
+    box-shadow: var(--shadow-card);
+    
+    /* Entrance Animation */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealUp 0.6s ease-out forwards;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@keyframes revealUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   🔙 NAVIGATION & HEADERS
+   ========================================= */
+.backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding-bottom: 4px;
+}
+
+.backButton:hover {
+    border-color: var(--primary-orange);
+    color: var(--primary-orange);
+    transform: translateY(-2px);
+    background: var(--bg-input);
+}
+
+.formBox h2 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+    /* Gradient Text handles both themes if text-main/muted switch correctly */
+    background: linear-gradient(135deg, var(--text-main) 30%, var(--text-muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =========================================
+   📝 INPUT FIELDS
+   ========================================= */
+.inputGroup {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputGroup label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: 4px;
+}
+
+.inputGroup input {
+    width: 90%;
+    padding: 14px 16px;
+    background: var(--bg-input); /* Dynamic background */
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.inputGroup input:focus {
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 3px rgba(238, 116, 40, 0.1);
+    /* Slightly lighten/darken on focus based on theme */
+    filter: brightness(1.1);
+}
+
+/* ✅ FIXED: Autofill now respects the theme variable */
+.inputGroup input:-webkit-autofill,
+.inputGroup input:-webkit-autofill:hover, 
+.inputGroup input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-main);
+    /* This creates an inset shadow using the variable color to 'paint' the background */
+    box-shadow: 0 0 0px 1000px var(--bg-input) inset !important; 
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.passwordWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.eyeButton {
+    position: absolute;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0;
+    display: flex;
+    transition: color 0.2s;
+}
+
+.eyeButton:hover {
+    color: var(--primary-orange);
+}
+
+/* =========================================
+   🔘 BUTTONS & LINKS
+   ========================================= */
+.submitButton {
+    width: 100%;
+    margin-top: 12px;
+    padding: 14px;
+    background: var(--primary-orange);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: 12px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    /* Soft shadow */
+    box-shadow: 0 4px 12px rgba(238, 116, 40, 0.2);
+}
+
+.submitButton:hover {
+    background: var(--primary-orange-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(238, 116, 40, 0.3);
+}
+
+.submitButton:active {
+    transform: translateY(0);
+}
+
+.submitButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.formBox p {
+    text-align: center;
+    margin-top: 24px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.linkButton {
+    background: none;
+    border: none;
+    color: var(--primary-orange);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0 4px;
+    transition: opacity 0.2s;
+}
+
+.linkButton:hover {
+    text-decoration: underline;
+    opacity: 0.9;
+}
+
+/* =========================================
+   🌓 THEME TOGGLE BUTTON
+   ========================================= */
+.themeToggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    /* Changed from fixed rgba to variable for better light mode visibility */
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10; 
+    box-shadow: var(--shadow-card);
+}
+
+.themeToggle:hover {
+    background: var(--bg-card-hover); 
+    border-color: var(--primary-orange);
+    color: var(--primary-orange);
+    transform: rotate(15deg) scale(1.05); 
+    box-shadow: 0 0 15px rgba(238, 116, 40, 0.3);
+}
+
+/* =========================================
+   👁️ VISIBILITY UTILS
+   ========================================= */
+.hidden {
+    display: none;
+}
+
+/* =========================================
+   📱 RESPONSIVE
+   ========================================= */
+@media (max-width: 600px) {
+    .formContainer {
+        padding: 32px 24px;
+        border-radius: 20px;
+        border: none;
+        /* Mobile adjustment */
+        background: var(--bg-card);
+    }
+    
+    .backButton {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .themeToggle {
+        top: 10px;
+        right: 10px;
+    }
+}

@@ -1,0 +1,257 @@
+/* app/globals.css */
+
+/* 1. Import Fonts Globally */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 2. Define Variables (Lighter Dark Mode / Glass Theme) */
+:root {
+    /* --- Backgrounds (Lighter Slate Palette) --- */
+    --bg-main: #021217; /* Deep background to contrast with lighter cards */
+    
+    /* Changed from dark teal to Slate 800/900 for better visibility */
+    --bg-card: rgba(30, 41, 59, 0.75); 
+    --bg-card-hover: rgba(51, 65, 85, 0.8);
+    
+    /* Lighter input background for better contrast */
+    --bg-input: rgba(51, 65, 85, 0.5); 
+    --bg-item: #1e293b; 
+
+    /* --- Accents --- */
+    --primary-orange: #EE7428;
+    --primary-orange-hover: #EA580C;
+    --secondary-cyan: #00d4ff; 
+    --accent-blue: #00d4ff;
+    --color-danger: #ef4444; 
+
+    /* --- Text --- */
+    --text-main: #F8FAFC;  /* Slate 50 (Brighter White) */
+    --text-muted: #CBD5E1; /* Slate 300 (Softer Gray) */
+    --text-inverse: #FFFFFF;
+    
+    /* --- UI Borders & Radius --- */
+    --border-color: rgba(255, 255, 255, 0.15); /* Slightly more visible border */
+    --radius-card: 20px;
+    --radius-btn: 12px;
+    --radius-sm: 8px;
+    
+    /* --- Shadows --- */
+    --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Glass shadow */
+    --shadow-glow: 0 0 20px rgba(238, 116, 40, 0.25); /* Orange glow */
+    
+    /* --- Orb Colors --- */
+    --orb-1: var(--primary-orange);
+    --orb-2: var(--secondary-cyan);
+    --orb-opacity: 0.25; /* Increased opacity slightly for vibrancy */
+
+    /* --- Fonts --- */
+    --font-heading: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+/* 3. Light Mode Overrides */
+.light-mode {
+    /* --- Backgrounds --- */
+    --bg-main: #F8FAFC;       
+    --bg-glass: rgba(255, 255, 255, 0.75);
+    --bg-card: #FFFFFF;
+    --bg-input: #F1F5F9;
+    --bg-card-hover: #F8FAFC;
+    --bg-item: #FFFFFF;
+
+    /* --- Accents --- */
+    --primary-orange: #EA580C;
+    
+    /* --- Text --- */
+    --text-main: #0F172A;    
+    --text-muted: #475569;    
+    --text-inverse: #FFFFFF;
+    
+    /* --- UI --- */
+    --border-color: #E2E8F0;  
+    --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+    --shadow-glow: 0 0 15px rgba(234, 88, 12, 0.2);
+    
+    /* --- Orb Colors --- */
+    --orb-2: #38BDF8;
+    --orb-opacity: 0.1;     
+}
+
+/* 4. Base Resets */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-top: 0;
+}
+
+/* =========================================
+   ✨ ANIMATED BACKGROUND
+   ========================================= */
+.homepage-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--bg-main);
+    transition: background-color 0.3s ease;
+    min-height: 100vh;
+}
+
+.bg-gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: var(--orb-opacity);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: var(--orb-1);
+    top: -100px;
+    left: -100px;
+}
+
+.orb-2 {
+    width: 600px;
+    height: 600px;
+    background: var(--orb-2);
+    top: 20%;
+    right: -150px;
+}
+
+.orb-float {
+    animation: float-orb 10s ease-in-out infinite;
+}
+
+@keyframes float-orb {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 50px); }
+}
+
+/* =========================================
+   🍞 TOAST NOTIFICATIONS (InternLink Design)
+   ========================================= */
+[data-sonner-toaster] {
+    font-family: var(--font-body) !important;
+    z-index: 9999 !important;
+}
+
+[data-sonner-toaster] [data-sonner-toast] {
+    /* Use glass variables for toasts */
+    background: rgba(30, 41, 59, 0.85) !important; 
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-card) !important;
+    padding: 18px 22px !important;
+    
+    color: var(--text-main) !important;
+    box-shadow: var(--shadow-card) !important;
+    gap: 12px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[data-sonner-toaster] [data-sonner-toast]:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), var(--shadow-glow) !important;
+    border-color: var(--primary-orange) !important;
+}
+
+[data-sonner-toaster] [data-sonner-toast] [data-title] {
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+    color: var(--text-main) !important;
+}
+
+[data-sonner-toaster] [data-sonner-toast] [data-description] {
+    font-family: var(--font-body) !important;
+    color: var(--text-muted) !important;
+}
+
+/* Toast Status Colors */
+[data-sonner-toast][data-type="success"] { border-left: 4px solid #22c55e !important; }
+[data-sonner-toast][data-type="success"] [data-icon] { color: #22c55e !important; }
+
+[data-sonner-toast][data-type="error"] { border-left: 4px solid var(--color-danger) !important; }
+[data-sonner-toast][data-type="error"] [data-icon] { color: var(--color-danger) !important; }
+
+[data-sonner-toast][data-type="info"],
+[data-sonner-toast][data-type="default"] { border-left: 4px solid var(--primary-orange) !important; }
+[data-sonner-toast][data-type="info"] [data-icon] { color: var(--primary-orange) !important; }
+
+[data-sonner-toast] [data-close-button] {
+    background: var(--bg-input) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-muted) !important;
+}
+[data-sonner-toast] [data-close-button]:hover {
+    background: var(--primary-orange) !important;
+    color: white !important;
+    border-color: var(--primary-orange) !important;
+}
+
+/* =========================================
+   🔒 APP SHELL LAYOUT (Fixes Sidebar Scroll)
+   ========================================= */
+
+/* 1. The Container */
+.company-shell {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* This keeps the whole app from scrolling the window */
+  background-color: var(--bg-main);
+}
+
+/* 2. The Sidebar Wrapper */
+.company-sidebar-wrapper {
+  flex-shrink: 0;
+  height: 100%;
+  border-right: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+  
+  /* ✅ Z-INDEX & OVERFLOW FIXES */
+  position: relative;   
+  z-index: 9999 !important; /* Force top layer */
+  
+  /* This allows tooltips to "spill out" of the box */
+  overflow: visible !important; 
+}
+
+/* ⚠️ CRITICAL: Ensure the Nav component INSIDE the wrapper doesn't clip either */
+.company-sidebar-wrapper > * {
+  overflow: visible !important;
+}
+
+/* 3. The Main Content Area */
+.company-main-content {
+  flex: 1;
+  height: 100%;
+  overflow-y: auto;     
+  overflow-x: hidden;   
+  position: relative;
+  
+  /* Push this layer down so Sidebar floats over it */
+  z-index: 1;           
+  scroll-behavior: smooth;
+}
+

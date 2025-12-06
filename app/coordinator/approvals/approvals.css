@@ -1,0 +1,347 @@
+/*
+|--------------------------------------------------------------------------
+| 🚨 CORE LAYOUT (Matched to Dashboard)
+|--------------------------------------------------------------------------
+*/
+
+
+/* 4. Content Container (Width matched to Dashboard) */
+.dashboard-inner {
+    width: 100%;
+    max-width: 1500px;    /* ✅ Matched to dashboard max-width */
+    margin: 0 auto;       
+    padding: 40px;        
+    padding-bottom: 120px; /* ✅ Extra space at bottom */
+    box-sizing: border-box; 
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ✨ HEADER BENTO BOX
+|--------------------------------------------------------------------------
+*/
+.header-bento {
+    display: block;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.header-bento-card {
+    display: flex !important;           
+    flex-direction: row !important;     
+    justify-content: space-between;     
+    align-items: center;                
+    width: 100%;                        
+    padding: 40px 50px;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    box-sizing: border-box; 
+    
+    /* ❌ EXPLICITLY NO HOVER TRANSFORM as requested */
+    transform: none !important;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    min-width: 300px; 
+}
+
+.dash-title {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -1px;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.dash-subtitle {
+    margin-top: 10px;
+    margin-bottom: 0;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| 🔍 SEARCH COMPONENT (Integrated in Bento)
+|--------------------------------------------------------------------------
+*/
+.header-right.search-area {
+    display: flex;
+    align-items: center;
+    gap: 40px; 
+    width: 450px; /* Specific width for search bar balance */
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: var(--radius-btn);
+    border: 1px solid var(--border-color);
+    background: var(--bg-input);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-input:focus {
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 3px rgba(238, 116, 40, 0.15);
+}
+
+.search-button {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: var(--radius-btn);
+    background: var(--primary-orange);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(238, 116, 40, 0.3);
+}
+
+.search-button:hover {
+    background: var(--primary-orange-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(238, 116, 40, 0.4);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| 📋 APPLICATIONS TABLE SECTION
+|--------------------------------------------------------------------------
+*/
+.applications-table-section {
+    background: var(--bg-card);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-deep);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    transition: border-color 0.4s ease;
+}
+
+.applications-table-section:hover {
+    border-color: var(--primary-orange);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.approvals-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.approvals-table th,
+.approvals-table td {
+    padding: 20px 24px;
+    text-align: left;
+    color: var(--text-main);
+    vertical-align: middle;
+}
+
+/* Header Styling */
+.approvals-table th {
+    background-color: var(--bg-input); 
+    color: var(--text-muted);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.approvals-table thead tr:first-child th:first-child { border-top-left-radius: 12px; }
+.approvals-table thead tr:first-child th:last-child { border-top-right-radius: 12px; }
+
+/* Rows */
+.approvals-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+
+.approvals-table td {
+    border-bottom: 1px solid var(--border-color);
+}
+.approvals-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.approvals-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Typography for Cells */
+.student-name, .job-title {
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 4px 0;
+    font-size: 1rem;
+}
+
+.student-email, .job-location {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.no-data-cell {
+    padding: 60px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| 🔘 BUTTONS & ACTIONS
+|--------------------------------------------------------------------------
+*/
+.resume-link-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary-cyan);
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: var(--radius-btn);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.resume-link-btn:hover {
+    background: var(--secondary-cyan);
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+}
+
+.action-cell {
+    min-width: 220px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    border: none;
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.approve-btn {
+    background-color: var(--color-success);
+    box-shadow: 0 4px 10px rgba(34, 197, 94, 0.2);
+}
+.approve-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(34, 197, 94, 0.4);
+}
+
+.reject-btn {
+    background-color: var(--bg-input); 
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+.reject-btn:hover {
+    background-color: var(--color-danger);
+    color: white;
+    border-color: var(--color-danger);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-badge.active {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--color-success);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+/*
+|--------------------------------------------------------------------------
+| 📱 RESPONSIVE
+|--------------------------------------------------------------------------
+*/
+@media (max-width: 1024px) {
+    .header-bento-card {
+        flex-direction: column !important;
+        align-items: flex-start;
+        gap: 24px;
+        padding: 30px;
+    }
+    
+    .header-right.search-area {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-inner {
+        padding: 20px;
+        padding-bottom: 100px;
+    }
+    
+    .approvals-table th, 
+    .approvals-table td {
+        padding: 16px;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+}

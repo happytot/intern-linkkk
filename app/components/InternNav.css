@@ -1,0 +1,196 @@
+/* =========================================
+   🧭 INTERNLINK NAVIGATION SYSTEM
+   ========================================= */
+
+/* --- 1. Main Header Container (Always Visible) --- */
+.intern-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px; /* Fixed height for header */
+    z-index: 1000;
+    
+    background: var(--bg-main); /* Or var(--bg-glass) */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+/* --- 2. Logo (Always Visible) --- */
+.logo-container {
+    font-size: 24px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    z-index: 1003; /* Ensure above drawer */
+}
+
+.intern-text { color: var(--text-main); }
+.link-text { color: var(--primary-orange); }
+
+/* --- 3. Base Link Styles --- */
+.nav-link {
+    font-family: 'inter', sans-serif;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-link:hover { color: var(--text-main); }
+.nav-link.active { color: var(--primary-orange); }
+.nav-icon { font-size: 1.2rem; display: flex; align-items: center;}
+
+/* Theme Button */
+.theme-toggle-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.theme-toggle-btn:hover {
+    background: var(--primary-orange);
+    color: white;
+    border-color: var(--primary-orange);
+}
+
+/* =========================================================
+   📱 MOBILE VIEW (< 550px)
+   ========================================================= */
+@media (max-width: 550px) {
+    
+    /* Hamburger Button */
+    .nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: var(--text-main);
+        font-size: 28px;
+        cursor: pointer;
+        z-index: 1003;
+    }
+
+    /* The Drawer (Hidden by default) */
+    .nav-menu {
+        position: fixed;
+        top: 70px; /* Push down by header height */
+        right: 0;
+        width: 35%;
+        height: calc(100vh - 70px);
+        background: rgba(2, 18, 23, 0.95);        backdrop-filter: blur(20px);
+        border-left: 1px solid var(--border-color);
+        
+        display: flex;
+        flex-direction: column;
+        padding: 40px 24px;
+        gap: 30px;
+        
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: 1002;
+    }
+
+    .nav-menu.open {
+        transform: translateX(0);
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-link {
+        font-size: 1.2rem; /* Larger text on mobile */
+    }
+
+    /* Overlay for Mobile */
+    .nav-overlay {
+        position: fixed;
+        top: 70px; /* Start below header */
+        left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+    }
+    .nav-overlay.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* =========================================================
+   💻 TABLET & DESKTOP SHARED (>= 551px)
+   ========================================================= */
+@media (min-width: 551px) {
+    /* Hide Mobile Elements */
+    .nav-toggle, .nav-overlay {
+        display: none !important;
+    }
+
+    /* Horizontal Menu Layout */
+    .nav-menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 30px;
+        transform: none !important; /* Reset slide effect */
+        height: auto;
+        background: transparent;
+        padding: 0;
+        position: static;
+        width: auto;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+    }
+}
+
+/* =========================================================
+   📏 TABLET VIEW (551px - 900px) -> ICONS ONLY
+   ========================================================= */
+@media (min-width: 551px) and (max-width: 900px) {
+    .nav-text {
+        display: none; /* Hide the text */
+    }
+    
+    .nav-icon {
+        font-size: 1.5rem; /* Make icons slightly larger */
+    }
+
+    .nav-link {
+        justify-content: center;
+        padding: 8px;
+    }
+}
+
+/* =========================================================
+   🖥️ LARGE DESKTOP VIEW (> 900px) -> FULL NAVBAR
+   ========================================================= */
+@media (min-width: 901px) {
+    .nav-text {
+        display: inline-block; /* Show text */
+    }
+}
